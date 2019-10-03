@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/pkostov/.oh-my-zsh
-
+#export FZF_BASE=/usr/local/opt/fzf/install
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -53,7 +53,7 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/share/dotnet/"
+# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/share/dotnet/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -91,7 +91,17 @@ alias gs="git status"
 alias gm="git merge"
 alias gb="git branch"
 alias gp="git push"
+# alias vim="/usr/local/Cellar/vim/8.0.1600/bin/vim"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source /usr/local/lib/dnx/bin/dnvm.sh
-export PATH=/usr/local/bin:$PATH
 eval $(/usr/libexec/path_helper -s)
+export PATH=/usr/local/bin:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH=$HOME/.dotnet/tools:$PATH
+export PATH=/usr/local/opt/go/libexec/bin:$PATH
+eval "$(rbenv init -)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
