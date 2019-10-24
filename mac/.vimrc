@@ -25,6 +25,7 @@ au BufRead,BufNewFile *.fs* set textwidth=79
 " configure editor with tabs and nice stuff...
 " --------------------------------------------------------------------------------
 
+set hidden
 set complete=.,w,b,k
 set completeopt=menuone,longest
 set formatoptions=croqn
@@ -47,12 +48,23 @@ set ttimeout
 set clipboard=unnamed
 "endif
 
+let mapleader = "\<Space>"
+"
+"Use <leader>w to save all open buffers
+nnoremap <leader>w :w<cr>
+"
+"Navigate buffers
+nnoremap <leader>k :bnext<cr>
+nnoremap <leader>j :bprev<cr>
+
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
 
+" NERDTree
 let NERDTreeMapOpenInTab='t'
 let g:nerdtree_tabs_open_on_gui_startup=0
 let g:nerdtree_tabs_open_on_console_startup=0
+let NERDTreeIgnore=['\.pyc', '\~$', '^__pycache__$']
 
 let g:ycm_autoclose_preview_window_after_completion=1
 
@@ -105,7 +117,7 @@ endif
 
 " mappings fzf
 map <C-P> :Ag<CR>
-map <C-I> :Files<CR>
+map <C-O> :Files<CR>
 map <C-B> :Buffers<CR>
 
 nnoremap <c-j> <c-w><c-j>
@@ -113,7 +125,6 @@ nnoremap <c-k> <c-w><c-k>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <Space> <NOP>
-let mapleader = "\<Space>"
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 noremap <leader>d :call ReactGotoDef()<CR>
 
@@ -136,15 +147,18 @@ let g:pymode_virtualenv = 1
 let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
 let g:pymode_lint_ignore = ["E501", "E702","E712",]
 
+" vimwiki
+let g:vimwiki_list = [{'path': '~/Dropbox/wiki/', 'syntax': 'markdown'}]
+au FileType vimwiki setlocal shiftwidth=6 tabstop=6 noexpandtab
 
 com! FormatJSON %!python -m json.tool
 
 syntax on
 
 syntax enable
-" set background=light
-" colorscheme solarized
-colorscheme monokai
+set background=light
+colorscheme solarized
+" colorscheme monokai
 
 set noerrorbells visualbell t_vb=
 if has('autocmd')
@@ -156,3 +170,7 @@ if executable('ag')
 endif
 
 set encoding=utf-8
+"Switch windows with Tab/Shift Tab in normal mode
+nnoremap <tab> :bnext<cr>
+nnoremap <s-tab> :bprev<cr>
+
