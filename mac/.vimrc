@@ -52,10 +52,6 @@ let mapleader = "\<Space>"
 "
 "Use <leader>w to save all open buffers
 nnoremap <leader>w :w<cr>
-"
-"Navigate buffers
-nnoremap <leader>k :bnext<cr>
-nnoremap <leader>j :bprev<cr>
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
@@ -88,6 +84,13 @@ let g:syntastic_mode_map = {
     \ "passive_filetypes": ["python"] }
 " end syntastic
 
+" Go
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_autosave = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_gocode_propose_source=0
+" end Go
 if has('win32') || has('win64')
   source ~/Vimfiles/.vundle.vim
   set guifont=Lucida_Console:h9
@@ -116,9 +119,9 @@ else
 endif
 
 " mappings fzf
-map <C-P> :Ag<CR>
-map <C-O> :Files<CR>
-map <C-B> :Buffers<CR>
+nnoremap <C-P> :Ag<CR>
+nnoremap <C-N> :Files<CR>
+nnoremap <C-B> :Buffers<CR>
 
 nnoremap <c-j> <c-w><c-j>
 nnoremap <c-k> <c-w><c-k>
@@ -126,13 +129,10 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <Space> <NOP>
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-noremap <leader>d :call ReactGotoDef()<CR>
-
-" move among buffers with CTRL
-"map <C-J> :bnext<CR>
-"map <C-K> :bprev<CR>
-
-" map <C-`> :bnext<CR>
+" noremap <leader>d :call ReactGotoDef()<CR>
+map <leader>d :GoDef<CR>
+nnoremap <leader>j <C-O>
+nnoremap <leader>k <C-I>
 
 " pymode
 let g:pymode = 1
@@ -173,4 +173,4 @@ set encoding=utf-8
 "Switch windows with Tab/Shift Tab in normal mode
 nnoremap <tab> :bnext<cr>
 nnoremap <s-tab> :bprev<cr>
-
+command! Bd bp|bd #
